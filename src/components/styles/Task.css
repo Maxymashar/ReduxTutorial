@@ -1,0 +1,23 @@
+.task {
+  display: flex;
+  border: 2px solid #373737;
+  border-radius: 4px;
+  margin: 4px 0px;
+  align-items: center;
+  font-size: 1.2rem;
+  font-family: "Open Sans";
+}
+
+.task input {
+  margin-right: 16px;
+  width: 18px;
+  height: 18px;
+}
+
+.task > * {
+  padding: 8px 12px;
+}
+
+.taskName {
+  flex: 1;
+}

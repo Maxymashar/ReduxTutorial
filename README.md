@@ -1,68 +1,72 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Redux Tutorial
 
-## Available Scripts
+##
 
-In the project directory, you can run:
+> Globalized external state
 
-### `npm start`
+## 🎬 Action
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+> Describes what 'event' has happened that will change the state
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Reducer
 
-### `npm test`
+> Describes how the action modifies the state
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 1️⃣ Create the store
 
-### `npm run build`
+```jsx
+import { createStore } from "redux";
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+const store = createStore(reducer);
+```
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## 2️⃣ Create an action
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+An action is a function that returns an object
 
-### `npm run eject`
+```jsx
+const action = () => ({ type: "increment" });
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## 3️⃣ Create a Reducer
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```jsx
+const reducer = (currentState, action) => {
+  switch (action.type) {
+    case "increment":
+      return currentState + 1;
+    case "decrement":
+      return currentState - 1;
+    default:
+      return currentState;
+  }
+};
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## 4️⃣ React-Redux
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+To give the components access to the state,Wrap all the components with the `Provider`
 
-## Learn More
+```jsx
+import { Provider } from "react-redux";
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+const App = () => <Provider store={store}>{/*Components*/}</Provider>;
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 5️⃣ Getting access to the state
 
-### Code Splitting
+```jsx
+import { useSelector } from "react-redux";
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+const state = useSelector((state) => state.reducerName);
+```
 
-### Analyzing the Bundle Size
+## 6️⃣ Changing the State
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+```jsx
+import { useDispatch } from "react-redux";
+import { increaseAction } from "./actions";
 
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+const dispatch = useDispatch();
+//dispatch(increaseAction)
+```

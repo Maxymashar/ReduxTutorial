@@ -1,0 +1,32 @@
+.header {
+  background-color: rgb(0, 119, 255);
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "Montserrat";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.counter {
+  display: flex;
+}
+
+.counter > * {
+  margin: 0px 8px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+.buttons button {
+  margin: 0px 4px;
+  padding: 8px 12px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
